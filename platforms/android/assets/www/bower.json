@@ -1,0 +1,22 @@
+{
+  "name": "dharness",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5",
+    "webcomponentsjs": "Polymer/webcomponentsjs#~0.6.0",
+    "paper-fab": "Polymer/paper-fab#~0.5.5",
+    "core-scaffold": "Polymer/core-scaffold#~0.5.5",
+    "core-menu": "Polymer/core-menu#~0.5.5",
+    "core-item": "Polymer/core-item#~0.5.5",
+    "paper-toast": "Polymer/paper-toast#~0.5.5",
+    "jquery": "~2.1.3"
+  }
+}
