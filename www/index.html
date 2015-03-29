@@ -73,8 +73,10 @@
                 </core-menu>
             </core-header-panel>
             <div tool>Diddle My Drawing</div>
-            <div id="sketch" width="500" height="300">
-                <canvas id="thecanvas" class="thecanvas" style="position: absolute;"style="position: absolute; zIndex: -1;" width="500" height="300"></canvas></canvas>
+            <div id="outer">
+                <div id="sketch" width="500" height="300">
+                    <canvas id="thecanvas" class="thecanvas" style="position: absolute;"style="position: absolute; zIndex: -1;" width="500" height="300"></canvas></canvas>
+                </div>
             </div>
             <paper-toast id="toast1" text="It was junk anyway!"></paper-toast>
         </core-scaffold>

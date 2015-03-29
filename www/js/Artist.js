@@ -14,6 +14,7 @@ function Artist(canvas) {
 
     function brushMode() {
 
+
         var tmp_canvas = document.getElementById('tmp_canvas');
         var sketch = document.querySelector('#sketch');
 
@@ -30,6 +31,7 @@ function Artist(canvas) {
 
             // var tmp_canvas = document.getElementById('tmp_canvas');
             var tmp_ctx = tmp_canvas.getContext('2d');
+
             // tmp_canvas.id = 'tmp_canvas';
             tmp_canvas.width = canvas.width;
             tmp_canvas.height = canvas.height;
@@ -57,13 +59,6 @@ function Artist(canvas) {
         }, false);
 
 
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
-
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
 
@@ -90,7 +85,7 @@ function Artist(canvas) {
             ppts = [];
         }, false);
 
-        var onPaint = function() {
+        onPaint = function() {
 
             // Saving all the points in an array
             ppts.push({
@@ -153,6 +148,7 @@ function Artist(canvas) {
 
             // var tmp_canvas = document.getElementById('tmp_canvas');
             var tmp_ctx = tmp_canvas.getContext('2d');
+
             // tmp_canvas.id = 'tmp_canvas';
             tmp_canvas.width = canvas.width;
             tmp_canvas.height = canvas.height;
@@ -177,12 +173,7 @@ function Artist(canvas) {
         }, false);
 
 
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
+
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -206,7 +197,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        onPaint = function() {
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -237,6 +228,7 @@ function Artist(canvas) {
 
             // var tmp_canvas = document.getElementById('tmp_canvas');
             var tmp_ctx = tmp_canvas.getContext('2d');
+
             // tmp_canvas.id = 'tmp_canvas';
             tmp_canvas.width = canvas.width;
             tmp_canvas.height = canvas.height;
@@ -259,14 +251,6 @@ function Artist(canvas) {
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
-
-
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -323,6 +307,7 @@ function Artist(canvas) {
 
             // var tmp_canvas = document.getElementById('tmp_canvas');
             var tmp_ctx = tmp_canvas.getContext('2d');
+
             // tmp_canvas.id = 'tmp_canvas';
             tmp_canvas.width = canvas.width;
             tmp_canvas.height = canvas.height;
@@ -349,13 +334,6 @@ function Artist(canvas) {
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -519,6 +497,13 @@ function Artist(canvas) {
 
     function swapToolFor(newTool) {
         _artist['draw' + newTool]();
+    }
+
+    function resetListeners() {
+        var tmp_canvas = document.getElementById('tmp_canvas');
+        var thecanvas = document.getElementById('thecanvas');
+
+        el.parentNode.replaceChild(elClone, el);
     }
 
 
