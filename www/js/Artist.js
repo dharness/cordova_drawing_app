@@ -57,12 +57,13 @@ function Artist(canvas) {
         }, false);
 
 
+        var colours = document.getElementsByName('colours')[0];
         /* Drawing on Paint App */
         tmp_ctx.lineWidth = 5;
         tmp_ctx.lineJoin = 'round';
         tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
+        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
+        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -176,13 +177,15 @@ function Artist(canvas) {
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-
+        var colours = document.getElementsByName('colours')[0];
         /* Drawing on Paint App */
         tmp_ctx.lineWidth = 5;
         tmp_ctx.lineJoin = 'round';
         tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
+        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
+        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
+
+
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -261,12 +264,14 @@ function Artist(canvas) {
         }, false);
 
 
+
+        var colours = document.getElementsByName('colours')[0];
         /* Drawing on Paint App */
         tmp_ctx.lineWidth = 5;
         tmp_ctx.lineJoin = 'round';
         tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
+        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
+        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -350,12 +355,13 @@ function Artist(canvas) {
         }, false);
 
 
+        var colours = document.getElementsByName('colours')[0];
         /* Drawing on Paint App */
         tmp_ctx.lineWidth = 5;
         tmp_ctx.lineJoin = 'round';
         tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
+        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
+        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
@@ -458,12 +464,13 @@ function Artist(canvas) {
         }, false);
 
 
+        var colours = document.getElementsByName('colours')[0];
         /* Drawing on Paint App */
         tmp_ctx.lineWidth = 5;
         tmp_ctx.lineJoin = 'round';
         tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = 'blue';
-        tmp_ctx.fillStyle = 'blue';
+        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
+        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);

@@ -65,6 +65,13 @@
             <core-header-panel navigation flex mode="seamed">
                 <core-toolbar id="core_toolbar">Tools</core-toolbar>
                 <core-menu theme="core-light-theme">
+                    <select name="colours" size="5">
+                        <option selected="selected">Black</option>
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Yellow</option>
+                        <option>Green</option>
+                    </select>
                     <core-item icon="sketch-icons:brush-tool" label="Brush" onclick="_artist.brushMode()"></core-item>
                     <core-item icon="sketch-icons:pen-tool" label="Pen" onclick="_artist.lineMode()"></core-item>
                     <core-item icon="sketch-icons:rectangle-tool" label="Rectangle" onclick="_artist.rectangleMode()"></core-item>
