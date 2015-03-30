@@ -65,6 +65,7 @@ function Artist(canvas) {
 
             sketch.appendChild(tmp_canvas);
         }
+        $(tmp_canvas).off();
         return tmp_canvas;
     }
 
@@ -526,12 +527,8 @@ function Artist(canvas) {
         };
     }
 
-    function penMode() {
+    function penMode(isStart) {
         window.mode = 'penMode';
-        //hack but a small one, i dont want to look into this bug right now
-        rectangleMode();
-        squareMode();
-        // penMode();
 
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
@@ -547,57 +544,52 @@ function Artist(canvas) {
 
         var ppts = [];
 
-        /* Mouse Capturing Work */
         tmp_canvas.addEventListener('mousemove', function(e) {
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-        $(tmp_canvas).dblclick(closePoly);
+        $(tmp_canvas).dblclick(function() {
+            console.log('double clicking')
+            closePoly();
+        });
 
-        tmp_canvas.addEventListener('mousedown', function(e) {
-            tmp_canvas.addEventListener('mousemove', draw, false);
+        var drawBtwNodes = function(e) {
+            {
+                tmp_canvas.addEventListener('mousemove', draw, false);
 
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+                mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+                mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
 
-            start_mouse.x = mouse.x;
-            start_mouse.y = mouse.y;
+                start_mouse.x = mouse.x;
+                start_mouse.y = mouse.y;
 
-            ppts.push(mouse.x);
-            ppts.push(mouse.y);
+                ppts.push(mouse.x);
+                ppts.push(mouse.y);
 
-            //draw a lil' node! how cute >.<
-            tmp_ctx.beginPath();
-            tmp_ctx.arc(mouse.x, mouse.y, 3, 0, 2 * Math.PI, false);
-            tmp_ctx.fillStyle = 'green';
-            tmp_ctx.fill();
-            tmp_ctx.lineWidth = 0.5;
-            tmp_ctx.strokeStyle = '#003300';
-            tmp_ctx.stroke();
-            tmp_ctx.closePath();
+                //draw a lil' node! how cute >.<
+                tmp_ctx.beginPath();
+                tmp_ctx.arc(mouse.x, mouse.y, 3, 0, 2 * Math.PI, false);
+                tmp_ctx.fillStyle = 'green';
+                tmp_ctx.fill();
+                tmp_ctx.lineWidth = 0.5;
+                tmp_ctx.strokeStyle = '#003300';
+                tmp_ctx.stroke();
+                tmp_ctx.closePath();
 
-            if (mouse.x >= ppts[0] - 5 && mouse.x <= ppts[0] + 5 && ppts.length > 2) {
-                closePoly();
+                if (mouse.x >= ppts[0] - 5 && mouse.x <= ppts[0] + 5 && ppts.length > 2) {
+                    closePoly();
+                }
             }
+        }
 
-
-            // draw();
-        }, false);
+        tmp_canvas.addEventListener('mousedown', drawBtwNodes, false);
 
         tmp_canvas.addEventListener('mouseup', function() {
             tmp_canvas.removeEventListener('mousemove', draw, false);
-
-            // Writing down to real canvas now
-            ctx.drawImage(tmp_canvas, 0, 0);
-            // Clearing tmp canvas
-            tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
-
         }, false);
 
         function closePoly() {
-
-            alert('closing')
             configureContext(tmp_ctx);
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
             tmp_ctx.beginPath();
@@ -613,30 +605,33 @@ function Artist(canvas) {
             ctx.drawImage(tmp_canvas, 0, 0);
             selectMode();
             ppts = [];
-            _artist['penMode']();
-            tmp_canvas.removeEventListener('mousemove', draw, false);
-            // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            _artist['penMode'](true);
+
+            $(tmp_canvas).remove();
+            _artist[window.mode]();
         }
 
 
         draw = function() {
 
-            //Configure a custom context for pen mode
-            tmp_ctx.lineWidth = 1;
-            tmp_ctx.lineJoin = 'round';
-            tmp_ctx.lineCap = 'round';
-            var colour = 'red';
-            tmp_ctx.strokeStyle = colour;
-            tmp_ctx.fillStyle = colour;
+            // //Configure a custom context for pen mode
+            // tmp_ctx.lineWidth = 1;
+            // tmp_ctx.lineJoin = 'round';
+            // tmp_ctx.lineCap = 'round';
+            // var colour = 'red';
+            // tmp_ctx.strokeStyle = colour;
+            // tmp_ctx.fillStyle = colour;
 
-            // Tmp canvas is always cleared up before drawing.
-            tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
-            if (start_mouse.x == 0 && start_mouse.y == 0) return;
-            tmp_ctx.beginPath();
-            tmp_ctx.moveTo(start_mouse.x, start_mouse.y);
-            tmp_ctx.lineTo(mouse.x, mouse.y);
-            tmp_ctx.stroke();
-            tmp_ctx.closePath();
+            // // Tmp canvas is always cleared up before drawing.
+            // tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+            // if (isStart) {
+            //     return;
+            // };
+            // tmp_ctx.beginPath();
+            // tmp_ctx.moveTo(start_mouse.x, start_mouse.y);
+            // tmp_ctx.lineTo(mouse.x, mouse.y);
+            // tmp_ctx.stroke();
+            // tmp_ctx.closePath();
 
         }
     }
@@ -702,15 +697,6 @@ function Artist(canvas) {
             tmp_ctx.strokeRect(x, y, width, height);
 
         };
-    }
-
-    function writeToCanvas() {
-        tmp_canvas.removeEventListener('mousemove', draw, false);
-
-        // Writing down to real canvas now
-        ctx.drawImage(tmp_canvas, 0, 0);
-        // Clearing tmp canvas
-        tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
     }
 
     function clear() {

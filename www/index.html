@@ -49,7 +49,7 @@
         border-bottom-left-radius: 2px;
         box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
         margin: 2%;
-        /*background-color: rgb(255, 255, 255);*/
+        background-color: rgb(255, 255, 255);
         text-align: left;
         }
          paper-fab {
@@ -70,10 +70,10 @@
         box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
         }
         
-       /* canvas {
+        canvas {
         border: 1px solid #ccc;
         background-color: white;
-        }*/
+        }
         </style>
     </head>
     <body unresolved>
@@ -88,7 +88,7 @@
             <core-item icon="sketch-icons:line-tool" label="Line" onclick="_artist.lineMode()"></core-item>
             <core-item id="square_rectangleButton" icon="sketch-icons:rectangle-tool" label="Rectangle" onclick="_artist.rectangleMode()"></core-item>
             <core-item id="circle_ellipseButton" icon="sketch-icons:ellipse-tool" label="Ellipse" onclick="_artist.ellipseMode()"></core-item>
-            <core-item icon="sketch-icons:pen-tool" label="Pen" onclick="_artist.penMode()"></core-item>
+            <core-item icon="sketch-icons:pen-tool" label="Pen" onclick="_artist.penMode(1)"></core-item>
             <core-item icon="sketch-icons:select-tool" label="Select" onclick="_artist.selectMode()"></core-item>
 
         </core-menu>
