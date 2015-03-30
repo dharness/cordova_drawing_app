@@ -60,7 +60,7 @@ function Artist(canvas) {
 
 
         tmp_canvas.addEventListener('mousedown', function(e) {
-            tmp_canvas.addEventListener('mousemove', onPaint, false);
+            tmp_canvas.addEventListener('mousemove', draw, false);
 
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
@@ -70,11 +70,11 @@ function Artist(canvas) {
                 y: mouse.y
             });
 
-            onPaint();
+            draw();
         }, false);
 
         tmp_canvas.addEventListener('mouseup', function() {
-            tmp_canvas.removeEventListener('mousemove', onPaint, false);
+            tmp_canvas.removeEventListener('mousemove', draw, false);
 
             // Writing down to real canvas now
             ctx.drawImage(tmp_canvas, 0, 0);
@@ -85,7 +85,7 @@ function Artist(canvas) {
             ppts = [];
         }, false);
 
-        onPaint = function() {
+        draw = function() {
 
             // Saving all the points in an array
             ppts.push({
@@ -176,7 +176,7 @@ function Artist(canvas) {
 
 
         tmp_canvas.addEventListener('mousedown', function(e) {
-            tmp_canvas.addEventListener('mousemove', onPaint, false);
+            tmp_canvas.addEventListener('mousemove', draw, false);
 
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
@@ -184,11 +184,11 @@ function Artist(canvas) {
             start_mouse.x = mouse.x;
             start_mouse.y = mouse.y;
 
-            onPaint();
+            draw();
         }, false);
 
         tmp_canvas.addEventListener('mouseup', function() {
-            tmp_canvas.removeEventListener('mousemove', onPaint, false);
+            tmp_canvas.removeEventListener('mousemove', draw, false);
 
             // Writing down to real canvas now
             ctx.drawImage(tmp_canvas, 0, 0);
@@ -197,7 +197,7 @@ function Artist(canvas) {
 
         }, false);
 
-        onPaint = function() {
+        draw = function() {
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -253,7 +253,7 @@ function Artist(canvas) {
         }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
-            tmp_canvas.addEventListener('mousemove', onPaint, false);
+            tmp_canvas.addEventListener('mousemove', draw, false);
 
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
@@ -261,11 +261,11 @@ function Artist(canvas) {
             start_mouse.x = mouse.x;
             start_mouse.y = mouse.y;
 
-            onPaint();
+            draw();
         }, false);
 
         tmp_canvas.addEventListener('mouseup', function() {
-            tmp_canvas.removeEventListener('mousemove', onPaint, false);
+            tmp_canvas.removeEventListener('mousemove', draw, false);
 
             // Writing down to real canvas now
             ctx.drawImage(tmp_canvas, 0, 0);
@@ -274,7 +274,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        var draw = function() {
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -336,7 +336,7 @@ function Artist(canvas) {
 
 
         tmp_canvas.addEventListener('mousedown', function(e) {
-            tmp_canvas.addEventListener('mousemove', onPaint, false);
+            tmp_canvas.addEventListener('mousemove', draw, false);
 
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
@@ -344,11 +344,11 @@ function Artist(canvas) {
             start_mouse.x = mouse.x;
             start_mouse.y = mouse.y;
 
-            onPaint();
+            draw();
         }, false);
 
         tmp_canvas.addEventListener('mouseup', function() {
-            tmp_canvas.removeEventListener('mousemove', onPaint, false);
+            tmp_canvas.removeEventListener('mousemove', draw, false);
 
             // Writing down to real canvas now
             ctx.drawImage(tmp_canvas, 0, 0);
@@ -357,7 +357,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        var draw = function() {
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -444,7 +444,7 @@ function Artist(canvas) {
         tmp_ctx.fillStyle = 'blue';
 
         tmp_canvas.addEventListener('mousedown', function(e) {
-            tmp_canvas.addEventListener('mousemove', onPaint, false);
+            tmp_canvas.addEventListener('mousemove', draw, false);
 
             mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
@@ -452,11 +452,11 @@ function Artist(canvas) {
             start_mouse.x = mouse.x;
             start_mouse.y = mouse.y;
 
-            onPaint();
+            draw();
         }, false);
 
         tmp_canvas.addEventListener('mouseup', function() {
-            tmp_canvas.removeEventListener('mousemove', onPaint, false);
+            tmp_canvas.removeEventListener('mousemove', draw, false);
 
             // Writing down to real canvas now
             ctx.drawImage(tmp_canvas, 0, 0);
@@ -465,7 +465,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        var draw = function() {
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
