@@ -35,13 +35,12 @@ function Artist(canvas) {
     }
 
     function configureContext(tmp_ctx) {
-        var colours = document.getElementsByName('colours')[0];
-        /* Drawing on Paint App */
         tmp_ctx.lineWidth = 5;
         tmp_ctx.lineJoin = 'round';
         tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
-        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
+        var colour = $("#colourpicker").val();
+        tmp_ctx.strokeStyle = colour;
+        tmp_ctx.fillStyle = colour;
     }
 
     function brushMode() {
@@ -522,4 +521,3 @@ function Artist(canvas) {
 }
 
 _artist = new Artist(document.getElementById('thecanvas'));
-// _artist.drawBrush();

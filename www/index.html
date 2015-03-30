@@ -10,82 +10,91 @@
         <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
         <link rel="import" href="bower_components/core-menu/core-menu.html">
         <link rel="import" href="bower_components/core-item/core-item.html">
+        <link rel="import" href="bower_components/core-overlay/core-overlay.html">
         <link rel="import" href="bower_components/paper-toast/paper-toast.html">
         <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+        <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
         <link rel="import" href="resources/sketch-icons.html">
+        <link rel="import" href="resources/generic-color-picker.html">
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            app.initialize();
+        app.initialize();
         </script>
         <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-            }
-            body {
-                font-family: sans-serif;
-            }
-            core-scaffold {
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
-            #core_toolbar {
-                color: rgb(255, 255, 255);
-                background-color: rgb(79, 125, 201);
-            }
-            .thecanvas {
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                border-bottom-right-radius: 2px;
-                border-bottom-left-radius: 2px;
-                box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-                margin: 2%;
-                background-color: rgb(255, 255, 255);
-                text-align: left;
-            }
-            paper-fab {
-                position: absolute;
-                right: 20px; 
-                bottom: 20px;
-            }
+        html, body {
+        height: 100%;
+        margin: 0;
+        }
+        body {
+        font-family: sans-serif;
+        }
+        core-scaffold {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        }
+        #core_toolbar {
+        color: rgb(255, 255, 255);
+        background-color: rgb(79, 125, 201);
+        }
+        .thecanvas {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        margin: 2%;
+        background-color: rgb(255, 255, 255);
+        text-align: left;
+        }
+        paper-fab {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        }
 
-            canvas {
-                border: 1px solid #ccc;
-                background-color: white;
-            }
+        #colourpicker {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border-style: none;
+        border-width:0px;
+        border:none;
+        
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        }
+        
+        canvas {
+        border: 1px solid #ccc;
+        background-color: white;
+        }
         </style>
     </head>
     <body unresolved>
         <core-scaffold>
-            <core-header-panel navigation flex mode="seamed">
-                <core-toolbar id="core_toolbar">Tools</core-toolbar>
-                <core-menu theme="core-light-theme">
-                    <select name="colours" size="5">
-                        <option selected="selected">Black</option>
-                        <option>Red</option>
-                        <option>Blue</option>
-                        <option>Yellow</option>
-                        <option>Green</option>
-                    </select>
-                    <core-item icon="sketch-icons:brush-tool" label="Brush" onclick="_artist.brushMode()"></core-item>
-                    <core-item icon="sketch-icons:pen-tool" label="Pen" onclick="_artist.lineMode()"></core-item>
-                    <core-item id="square_rectangleButton" icon="sketch-icons:square-tool" label="Rectangle" onclick="_artist.rectangleMode()"></core-item>
-                    <core-item id="circle_ellipseButton" icon="sketch-icons:ellipse-tool" label="Ellipse" onclick="_artist.ellipseMode()"></core-item>
-                    <core-item icon="sketch-icons:select-tool" label="Select" onclick="_artist.selectMode()"></core-item>
-                </core-menu>
-            </core-header-panel>
-            <div tool>Diddle My Drawing</div>
-            <div id="outer">
-                <div id="sketch" width="500" height="300">
-                    <canvas id="thecanvas" class="thecanvas" style="position: absolute;"style="position: absolute; zIndex: -1;" width="500" height="300"></canvas></canvas>
-                </div>
+        <core-header-panel navigation flex mode="seamed">
+        <core-toolbar id="core_toolbar">Tools</core-toolbar>
+        <core-menu theme="core-light-theme">
+        <input type="color" id="colourpicker" class="colourpicker" >
+        <core-item icon="sketch-icons:brush-tool" label="Brush" onclick="_artist.brushMode()"></core-item>
+        <core-item icon="sketch-icons:pen-tool" label="Pen" onclick="_artist.lineMode()"></core-item>
+        <core-item id="square_rectangleButton" icon="sketch-icons:square-tool" label="Rectangle" onclick="_artist.rectangleMode()"></core-item>
+        <core-item id="circle_ellipseButton" icon="sketch-icons:ellipse-tool" label="Ellipse" onclick="_artist.ellipseMode()"></core-item>
+        <core-item icon="sketch-icons:select-tool" label="Select" onclick="_artist.selectMode()"></core-item>
+        </core-menu>
+        </core-header-panel>
+        <div tool>Diddle My Drawing</div>
+        <div id="outer">
+            <div id="sketch" width="500" height="300">
+                <canvas id="thecanvas" class="thecanvas" style="position: absolute;"style="position: absolute; zIndex: -1;" width="500" height="300"></canvas></canvas>
             </div>
-            <paper-toast id="toast1" text="It was junk anyway!"></paper-toast>
+        </div>
+        <paper-toast id="toast1" text="It was junk anyway!"></paper-toast>
         </core-scaffold>
         <paper-fab icon="delete" onclick="document.querySelector('#toast1').show(); _artist.clear()"></paper-fab>
     </body>
