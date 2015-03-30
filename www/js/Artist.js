@@ -34,6 +34,16 @@ function Artist(canvas) {
         return tmp_canvas;
     }
 
+    function configureContext(tmp_ctx) {
+        var colours = document.getElementsByName('colours')[0];
+        /* Drawing on Paint App */
+        tmp_ctx.lineWidth = 5;
+        tmp_ctx.lineJoin = 'round';
+        tmp_ctx.lineCap = 'round';
+        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
+        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
+    }
+
     function brushMode() {
 
         var tmp_canvas = createTmpCanvas();
@@ -94,6 +104,7 @@ function Artist(canvas) {
         }, false);
 
         onPaint = function() {
+            configureContext(tmp_ctx);
 
             // Saving all the points in an array
             ppts.push({
@@ -161,16 +172,6 @@ function Artist(canvas) {
         }, false);
 
 
-        var colours = document.getElementsByName('colours')[0];
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
-        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
-
-
-
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
 
@@ -194,6 +195,8 @@ function Artist(canvas) {
         }, false);
 
         onPaint = function() {
+
+            configureContext(tmp_ctx);
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -228,15 +231,6 @@ function Artist(canvas) {
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-        var colours = document.getElementsByName('colours')[0];
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
-        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
-
-
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
 
@@ -260,7 +254,7 @@ function Artist(canvas) {
         }, false);
 
         var onPaint = function() {
-
+            configureContext(tmp_ctx);
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 
@@ -299,14 +293,6 @@ function Artist(canvas) {
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-        var colours = document.getElementsByName('colours')[0];
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
-        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
-
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
 
@@ -330,6 +316,8 @@ function Artist(canvas) {
         }, false);
 
         var onPaint = function() {
+
+            configureContext(tmp_ctx);
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -388,15 +376,6 @@ function Artist(canvas) {
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-
-        var colours = document.getElementsByName('colours')[0];
-        /* Drawing on Paint App */
-        tmp_ctx.lineWidth = 5;
-        tmp_ctx.lineJoin = 'round';
-        tmp_ctx.lineCap = 'round';
-        tmp_ctx.strokeStyle = colours.options[colours.options.selectedIndex].text;
-        tmp_ctx.fillStyle = colours.options[colours.options.selectedIndex].text;
-
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', onPaint, false);
 
@@ -420,6 +399,8 @@ function Artist(canvas) {
         }, false);
 
         var onPaint = function() {
+
+            configureContext(tmp_ctx);
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
