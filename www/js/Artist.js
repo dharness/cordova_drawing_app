@@ -253,7 +253,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        onPaint = function() {
             configureContext(tmp_ctx);
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -315,7 +315,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        onPaint = function() {
 
             configureContext(tmp_ctx);
 
@@ -398,7 +398,7 @@ function Artist(canvas) {
 
         }, false);
 
-        var onPaint = function() {
+        onPaint = function() {
 
             configureContext(tmp_ctx);
 
