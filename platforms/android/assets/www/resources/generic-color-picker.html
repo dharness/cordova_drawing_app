@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+</head>
+<body>
+<polymer-element name="generic-color-picker" attributes="redValue greenValue blueValue newColor">
+    <template>
+
+        <link rel="stylesheet" type="text/css" href="../css/generic-color-picker.css">
+
+        <section class="red-slider">
+            <paper-slider id="redSlider" pin min="0" max="255" value={{redValue}}></paper-slider>
+        </section>
+        <br>
+        <section class="green-slider">
+            <paper-slider id="greenSlider" pin min="0" max="255" value={{greenValue}} ></paper-slider>
+        </section><br>
+        <section class="blue-slider">
+            <paper-slider id="blueSlider" pin min="0" max="255" value={{blueValue}}  ></paper-slider>
+
+        </section><br>
+        <section id="color" style="background-color:{{newColor}}" class="p" ><br>
+            <br>
+            <br></section>
+        <paper-input id="colorValue" label={{newColor}}></paper-input>
+    </template>
+    <script >
+        Polymer('generic-color-picker', {
+            redValue: 30,
+            greenValue: 20,
+            blueValue: 255,
+            newColor: '',
+            observe: {
+                redValue: 'colorChanged',
+                greenValue: 'colorChanged',
+                blueValue: 'colorChanged'
+            },
+            ready: function () {
+                this.redValue = 30;
+                this.greenValue = 20;
+                this.blueValue = 255;
+                this.newColor = "#" + this.redValue.toString(16).concat(this.greenValue.toString(16)).concat(this.blueValue.toString(16));
+                console.log(this.newColor);
+            },
+            colorChanged: function(oldValue, newValue) {
+                console.log("OldValue: " + oldValue);
+                console.log("NewValue: " + newValue);
+                var newRedValue = this.redValue < 16 ? '0' + this.redValue.toString(16) : this.redValue.toString(16);
+                var newGreenValue = this.greenValue < 16 ? '0' + this.greenValue.toString(16) :this.greenValue.toString(16);
+                var newBlueValue = this.blueValue < 16 ? '0' + this.blueValue.toString(16) : this.blueValue.toString(16);
+                this.newColor = "#" + newRedValue.concat(newGreenValue).concat(newBlueValue);
+            }
+        });
+    </script>
+</polymer-element>
+</body>
+</html>

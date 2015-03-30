@@ -19,6 +19,7 @@
     "paper-toast": "Polymer/paper-toast#~0.5.5",
     "jquery": "~2.1.3",
     "paper-dropdown": "Polymer/paper-dropdown#~0.5.5",
-    "paper-slider": "Polymer/paper-slider#~0.5.5"
+    "paper-slider": "Polymer/paper-slider#~0.5.5",
+    "fabric": "~1.4.13"
   }
 }

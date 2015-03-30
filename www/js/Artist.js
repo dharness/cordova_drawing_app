@@ -1,5 +1,10 @@
 function Artist(canvas) {
 
+
+    //////////////////////////////////////////////////////
+    //                  Initialization                  //
+    //////////////////////////////////////////////////////
+
     this.mode = 'select';
     ctx = canvas.getContext("2d");
     mouse = {
@@ -11,6 +16,11 @@ function Artist(canvas) {
         mouse.x = e.layerX;
         mouse.y = e.layerY;
     }, false);
+
+
+    //////////////////////////////////////////////////////
+    //                Utility Functions                 //
+    //////////////////////////////////////////////////////
 
     function createTmpCanvas() {
         var tmp_canvas = document.getElementById('tmp_canvas');
@@ -42,6 +52,10 @@ function Artist(canvas) {
         tmp_ctx.strokeStyle = colour;
         tmp_ctx.fillStyle = colour;
     }
+
+    //////////////////////////////////////////////////////
+    //                  Drawing Modes                   //
+    //////////////////////////////////////////////////////
 
     function brushMode() {
 
@@ -136,7 +150,6 @@ function Artist(canvas) {
             tmp_ctx.stroke();
 
         };
-
     }
 
     function lineMode() {
@@ -260,13 +273,12 @@ function Artist(canvas) {
             tmp_ctx.strokeRect(x, y, width, height);
 
         };
-
     }
 
     function squareMode() {
 
         //Swap the button to present square mode
-        $('#square_rectangleButton').attr('icon', 'sketch-icons:square-tool');
+        $('#square_rectangleButton').attr('icon', 'sketch-icons:rectangle-tool');
         $('#square_rectangleButton').attr('onclick', '_artist.rectangleMode()');
         $('#square_rectangleButton').attr('label', 'Rectangle');
 
@@ -321,7 +333,7 @@ function Artist(canvas) {
             var width = Math.abs(mouse.x - start_mouse.x);
             var height = Math.abs(mouse.y - start_mouse.y);
             width = height = Math.min(width, height);
-            tmp_ctx.strokeRect(x, y, width, height);
+            tmp_ctx.fillRect(x, y, width, height);
 
         };
     }
@@ -490,22 +502,102 @@ function Artist(canvas) {
         };
     }
 
+    function penMode() {
+
+        var tmp_canvas = createTmpCanvas();
+        var tmp_ctx = tmp_canvas.getContext('2d');
+
+        var mouse = {
+            x: 0,
+            y: 0
+        };
+        var start_mouse = {
+            x: 0,
+            y: 0
+        };
+
+        var ppts = [];
+
+        /* Mouse Capturing Work */
+        tmp_canvas.addEventListener('mousemove', function(e) {
+            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+        }, false);
+
+        $(tmp_canvas).dblclick(function() {
+            closePoly();
+            selectMode();
+            $(tmp_canvas).dblclick(function() {});
+        });
+
+        tmp_canvas.addEventListener('mousedown', function(e) {
+            tmp_canvas.addEventListener('mousemove', draw, false);
+
+            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+
+            start_mouse.x = mouse.x;
+            start_mouse.y = mouse.y;
+
+            ppts.push(mouse.x);
+            ppts.push(mouse.y);
+
+            // draw();
+        }, false);
+
+        tmp_canvas.addEventListener('mouseup', function() {
+            tmp_canvas.removeEventListener('mousemove', draw, false);
+
+            // Writing down to real canvas now
+            ctx.drawImage(tmp_canvas, 0, 0);
+            // Clearing tmp canvas
+            tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+
+        }, false);
+
+        function closePoly() {
+            tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+            tmp_ctx.beginPath();
+
+            tmp_ctx.moveTo(ppts[0], ppts[1]);
+            for (item = 2; item < ppts.length - 1; item += 2) {
+                tmp_ctx.lineTo(ppts[item], ppts[item + 1])
+            }
+
+            tmp_ctx.closePath();
+            tmp_ctx.fill();
+        }
+
+        draw = function() {
+
+            configureContext(tmp_ctx);
+
+            // Tmp canvas is always cleared up before drawing.
+            tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+
+            tmp_ctx.beginPath();
+            tmp_ctx.moveTo(start_mouse.x, start_mouse.y);
+            tmp_ctx.lineTo(mouse.x, mouse.y);
+            tmp_ctx.stroke();
+            tmp_ctx.closePath();
+
+        }
+    }
+
+    function selectMode() {
+        draw = function() {
+
+        }
+    }
 
     function clear() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    function swapToolFor(newTool) {
-        _artist['draw' + newTool]();
-    }
 
-    function resetListeners() {
-        var tmp_canvas = document.getElementById('tmp_canvas');
-        var thecanvas = document.getElementById('thecanvas');
-
-        el.parentNode.replaceChild(elClone, el);
-    }
-
+    //////////////////////////////////////////////////////
+    //                Public Functions                  //
+    //////////////////////////////////////////////////////
 
     return {
         brushMode: brushMode,
@@ -514,10 +606,12 @@ function Artist(canvas) {
         squareMode: squareMode,
         ellipseMode: ellipseMode,
         circleMode: circleMode,
-        clear: clear,
-        swapToolFor: swapToolFor
+        penMode: penMode,
+        selectMode: selectMode,
+        clear: clear
     }
 
 }
 
+// create a global artist
 _artist = new Artist(document.getElementById('thecanvas'));
