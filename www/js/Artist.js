@@ -505,6 +505,7 @@ function Artist(canvas) {
     function penMode() {
         //hack but a small one, i dont want to look into this bug right now
         rectangleMode();
+        squareMode();
         // penMode();
 
         var tmp_canvas = createTmpCanvas();
@@ -527,11 +528,7 @@ function Artist(canvas) {
             mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
         }, false);
 
-        $(tmp_canvas).dblclick(function() {
-            closePoly();
-            selectMode();
-            $(tmp_canvas).dblclick(function() {});
-        });
+        $(tmp_canvas).dblclick(closePoly);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -545,10 +542,17 @@ function Artist(canvas) {
             ppts.push(mouse.x);
             ppts.push(mouse.y);
 
+            tmp_ctx.beginPath();
+            tmp_ctx.arc(mouse.x, mouse.y, 5, 0, 2 * Math.PI, false);
+            tmp_ctx.fillStyle = 'green';
+            tmp_ctx.fill();
+            tmp_ctx.lineWidth = 0.5;
+            tmp_ctx.strokeStyle = '#003300';
+            tmp_ctx.stroke();
+            tmp_ctx.closePath();
+
             if (mouse.x >= ppts[0] - 5 && mouse.x <= ppts[0] + 5 && ppts.length > 2) {
                 closePoly();
-                selectMode();
-                $(tmp_canvas).dblclick(function() {});
             }
 
 
@@ -581,8 +585,11 @@ function Artist(canvas) {
             tmp_ctx.fill();
             // Writing down to real canvas now
             ctx.drawImage(tmp_canvas, 0, 0);
+            selectMode();
+            ppts = [];
             // ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
+
 
         draw = function() {
 
