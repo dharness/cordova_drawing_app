@@ -503,6 +503,9 @@ function Artist(canvas) {
     }
 
     function penMode() {
+        //hack but a small one, i dont want to look into this bug right now
+        rectangleMode();
+        // penMode();
 
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
@@ -542,6 +545,13 @@ function Artist(canvas) {
             ppts.push(mouse.x);
             ppts.push(mouse.y);
 
+            if (mouse.x >= ppts[0] - 5 && mouse.x <= ppts[0] + 5 && ppts.length > 2) {
+                closePoly();
+                selectMode();
+                $(tmp_canvas).dblclick(function() {});
+            }
+
+
             // draw();
         }, false);
 
@@ -556,6 +566,9 @@ function Artist(canvas) {
         }, false);
 
         function closePoly() {
+
+            alert('closing')
+            configureContext(tmp_ctx);
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
             tmp_ctx.beginPath();
 
@@ -566,11 +579,20 @@ function Artist(canvas) {
 
             tmp_ctx.closePath();
             tmp_ctx.fill();
+            // Writing down to real canvas now
+            ctx.drawImage(tmp_canvas, 0, 0);
+            // ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
         draw = function() {
 
-            configureContext(tmp_ctx);
+            //Configure a custom context for pen mode
+            tmp_ctx.lineWidth = 1;
+            tmp_ctx.lineJoin = 'round';
+            tmp_ctx.lineCap = 'round';
+            var colour = 'red';
+            tmp_ctx.strokeStyle = colour;
+            tmp_ctx.fillStyle = colour;
 
             // Tmp canvas is always cleared up before drawing.
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
@@ -592,6 +614,7 @@ function Artist(canvas) {
 
     function clear() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
     }
 
 
