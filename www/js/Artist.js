@@ -560,12 +560,14 @@ function Artist(canvas) {
 
                 mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
                 mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-
+                draw();
                 start_mouse.x = mouse.x;
                 start_mouse.y = mouse.y;
 
                 ppts.push(mouse.x);
                 ppts.push(mouse.y);
+
+
 
                 //draw a lil' node! how cute >.<
                 tmp_ctx.beginPath();
@@ -614,24 +616,21 @@ function Artist(canvas) {
 
         draw = function() {
 
-            // //Configure a custom context for pen mode
-            // tmp_ctx.lineWidth = 1;
-            // tmp_ctx.lineJoin = 'round';
-            // tmp_ctx.lineCap = 'round';
-            // var colour = 'red';
-            // tmp_ctx.strokeStyle = colour;
-            // tmp_ctx.fillStyle = colour;
-
-            // // Tmp canvas is always cleared up before drawing.
-            // tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
-            // if (isStart) {
-            //     return;
-            // };
-            // tmp_ctx.beginPath();
-            // tmp_ctx.moveTo(start_mouse.x, start_mouse.y);
-            // tmp_ctx.lineTo(mouse.x, mouse.y);
-            // tmp_ctx.stroke();
-            // tmp_ctx.closePath();
+            //Configure a custom context for pen mode
+            tmp_ctx.lineWidth = 1;
+            tmp_ctx.lineJoin = 'round';
+            tmp_ctx.lineCap = 'round';
+            var colour = 'red';
+            tmp_ctx.strokeStyle = colour;
+            tmp_ctx.fillStyle = colour;
+            if (start_mouse.x == 0 && start_mouse.y == 0) {
+                return;
+            };
+            tmp_ctx.beginPath();
+            tmp_ctx.moveTo(start_mouse.x, start_mouse.y);
+            tmp_ctx.lineTo(mouse.x, mouse.y);
+            tmp_ctx.stroke();
+            tmp_ctx.closePath();
 
         }
     }
