@@ -50,7 +50,12 @@ function Artist() {
 
             sketch.appendChild(tmp_canvas);
         }
-        $(tmp_canvas).off();
+
+        tmp_canvas.addEventListener('mousemove', function(e) {
+            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+        }, false);
+
         return tmp_canvas;
     }
 
@@ -115,10 +120,6 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var last_mouse = {
             x: 0,
             y: 0
@@ -126,12 +127,6 @@ function Artist() {
 
         // Pencil Points
         var ppts = [];
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -210,22 +205,10 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var start_mouse = {
             x: 0,
             y: 0
         };
-
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
-
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -276,21 +259,10 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var start_mouse = {
             x: 0,
             y: 0
         };
-
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -338,21 +310,10 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var start_mouse = {
             x: 0,
             y: 0
         };
-
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -401,10 +362,6 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var start_mouse = {
             x: 0,
             y: 0
@@ -414,12 +371,6 @@ function Artist() {
             y: 0
         };
 
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -489,10 +440,6 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var start_mouse = {
             x: 0,
             y: 0
@@ -501,13 +448,6 @@ function Artist() {
             x: 0,
             y: 0
         };
-
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -561,21 +501,12 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
         var start_mouse = {
             x: 0,
             y: 0
         };
 
         var ppts = [];
-
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         $(tmp_canvas).dblclick(function() {
             console.log('double clicking')
@@ -664,21 +595,12 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
+        configureImageDrag();
+
         var start_mouse = {
             x: 0,
             y: 0
         };
-
-
-        /* Mouse Capturing Work */
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
 
         tmp_canvas.addEventListener('mousedown', function(e) {
             tmp_canvas.addEventListener('mousemove', draw, false);
@@ -702,11 +624,6 @@ function Artist() {
                 height: Math.abs(mouse.y - start_mouse.y)
             });
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
-            var dataUrl = _canvas.toDataURL();
-            console.log(dataUrl);
-            $(this).css('cursor', 'pointer', 'auto');
-            _artist.pasteMode();
-
         };
 
         draw = function() {
@@ -732,12 +649,33 @@ function Artist() {
 
     function cut(coords) {
         if (coords) {
+
             imageData = ctx.getImageData(coords.left + 2, coords.top + 2, coords.width - 4, coords.height - 4);
-            ctx.clearRect(coords.left - 2, coords.top - 2, coords.width + 4, coords.height + 4)
+            ctx.clearRect(coords.left - 2, coords.top - 2, coords.width + 4, coords.height + 4);
+
+            var pasteArea = document.createElement('canvas');
+            pasteArea.width = coords.width;
+            pasteArea.height = coords.height;
+            var pCTX = pasteArea.getContext('2d');
+
+            pCTX.putImageData(imageData, 0, 0);
+
+            var dataUrl = pasteArea.toDataURL();
+            document.getElementById('pasteImage').src = dataUrl;
+
         } else {
             imageData = ctx.getImageData(0, 0, _canvas.width, _canvas.height);
         }
+    }
 
+    function configureImageDrag() {
+        document.getElementById('pasteImage').addEventListener('mousedown', function(e) {
+
+            tmp_canvas.addEventListener('mouseup', function() {
+                alert('HEre');
+            }, false);
+
+        }, false);
     }
 
     function pasteMode(x, y) {
@@ -746,26 +684,9 @@ function Artist() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
-        var mouse = {
-            x: 0,
-            y: 0
-        };
-        var start_mouse = {
-            x: 0,
-            y: 0
-        };
-
-        var ppts = [];
-
-        tmp_canvas.addEventListener('mousemove', function(e) {
-            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
-            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
-        }, false);
-
         tmp_canvas.addEventListener('mousedown', function(e) {
             ctx.putImageData(imageData, mouse.x, mouse.y);
         })
-
     }
 
     function clear() {
