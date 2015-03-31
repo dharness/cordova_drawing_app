@@ -660,7 +660,7 @@ function Artist() {
         }
     }
 
-    function selectMode1() {
+    function selectMode() {
         var tmp_canvas = createTmpCanvas();
         var tmp_ctx = tmp_canvas.getContext('2d');
 
@@ -692,15 +692,22 @@ function Artist() {
             draw();
         }, false);
 
-        tmp_canvas.addEventListener('mouseup', function() {
+        tmp_canvas.onmouseup = function() {
             tmp_canvas.removeEventListener('mousemove', draw, false);
 
-            // Writing down to real canvas now
-            // ctx.drawImage(tmp_canvas, 0, 0);
-            // Clearing tmp canvas
+            cut({
+                left: start_mouse.x,
+                top: start_mouse.y,
+                width: Math.abs(mouse.x - start_mouse.x),
+                height: Math.abs(mouse.y - start_mouse.y)
+            });
             tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+            var dataUrl = _canvas.toDataURL();
+            console.log(dataUrl);
+            $(this).css('cursor', 'pointer', 'auto');
+            _artist.pasteMode();
 
-        }, false);
+        };
 
         draw = function() {
             // Set custom context for select mode
@@ -723,19 +730,42 @@ function Artist() {
         };
     }
 
-    function selectMode() {
-        draw = function() {
-
+    function cut(coords) {
+        if (coords) {
+            imageData = ctx.getImageData(coords.left + 2, coords.top + 2, coords.width - 4, coords.height - 4);
+            ctx.clearRect(coords.left - 2, coords.top - 2, coords.width + 4, coords.height + 4)
+        } else {
+            imageData = ctx.getImageData(0, 0, _canvas.width, _canvas.height);
         }
+
     }
 
-    function cut() {
-        window.clipboard = _canvas;
-        // clear();
-    }
+    function pasteMode(x, y) {
+        window.mode = 'pasteMode';
 
-    function paste() {
-        ctx.drawImage(window.clipboard, 0, 0);
+        var tmp_canvas = createTmpCanvas();
+        var tmp_ctx = tmp_canvas.getContext('2d');
+
+        var mouse = {
+            x: 0,
+            y: 0
+        };
+        var start_mouse = {
+            x: 0,
+            y: 0
+        };
+
+        var ppts = [];
+
+        tmp_canvas.addEventListener('mousemove', function(e) {
+            mouse.x = typeof e.offsetX !== 'undefined' ? e.offsetX : e.layerX;
+            mouse.y = typeof e.offsetY !== 'undefined' ? e.offsetY : e.layerY;
+        }, false);
+
+        tmp_canvas.addEventListener('mousedown', function(e) {
+            ctx.putImageData(imageData, mouse.x, mouse.y);
+        })
+
     }
 
     function clear() {
@@ -762,7 +792,7 @@ function Artist() {
         setLayer: setLayer,
         addLayer: addLayer,
         cut: cut,
-        paste: paste,
+        pasteMode: pasteMode,
         clear: clear
     }
 
