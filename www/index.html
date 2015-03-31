@@ -42,7 +42,7 @@
         color: rgb(255, 255, 255);
         background-color: rgb(79, 125, 201);
         }
-         .thecanvas {
+        .thecanvas {
         border-top-left-radius: 2px;
         border-top-right-radius: 2px;
         border-bottom-right-radius: 2px;
@@ -71,8 +71,14 @@
         }
         
         canvas {
-        border: 1px solid #ccc;
-        background-color: white;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        margin: 2%;
+        background-color: rgb(255, 255, 255);
+        text-align: left;
         }
         </style>
     </head>
@@ -93,11 +99,16 @@
 
         </core-menu>
         </core-header-panel>
-        <div tool>Diddle My Drawing</div>
-
-
+        <div tool>
+            Diddle My Drawing
+            <select id="layers" onchange="_artist.setLayer()">
+                <option value="0">Layer: 0</option>
+            </select>
+            <button onclick="_artist.addLayer()"> New Layer</button>
+        </div>
         <div id="outer">
             <div id="sketch" width="500" height="300">
+                    <canvas id="bgCanvas" class="thecanvas" style="position: absolute;"style="position: absolute; zIndex: -100;" width="500" height="300"></canvas>
                     <canvas id="thecanvas" class="thecanvas" style="position: absolute;"style="position: absolute; zIndex: -1;" width="500" height="300"></canvas>
             </div>
         </div>
