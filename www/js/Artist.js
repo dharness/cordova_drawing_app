@@ -64,8 +64,12 @@ function Artist() {
     }
 
     // the white one is at 0, blue is at 1
-    function setLayer(layerNum) {
+    function setLayer(otherNum) {
         var e = document.getElementById('layers');
+        if (otherNum) {
+            e.value = otherNum;
+        }
+
         var layerNum = e.options[e.selectedIndex].value;
         var top = Number(_canvas.style.zIndex) + 1;
         _canvas = window.canvases[layerNum];
@@ -725,6 +729,15 @@ function Artist() {
         }
     }
 
+    function cut() {
+        window.clipboard = _canvas;
+        // clear();
+    }
+
+    function paste() {
+        ctx.drawImage(window.clipboard, 0, 0);
+    }
+
     function clear() {
         ctx.clearRect(0, 0, _canvas.width, _canvas.height);
         $(tmp_canvas).remove();
@@ -748,6 +761,8 @@ function Artist() {
         selectMode: selectMode,
         setLayer: setLayer,
         addLayer: addLayer,
+        cut: cut,
+        paste: paste,
         clear: clear
     }
 
